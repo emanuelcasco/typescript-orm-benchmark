@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "checkJs": false,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "lib": ["esnext", "dom"],
+    "module": "commonjs",
+    "noUnusedLocals": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "esnext",
+    "paths": {
+      "*": ["node_modules/@types/*", "@types/*"]
+    }
+  },
+  "include": ["./"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "dist"]
+}
