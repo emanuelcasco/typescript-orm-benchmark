@@ -1,45 +1,18 @@
 # TypeScript ORM benchmark
 
-TypeScript ORM research. 
+TypeScript ORM research.
 
-Considered ORMs:
+## Motivation
 
-- Knex *.
-- Sequelize.
-- Objection.
-- TypeORM.
+// TODO why am i doing this?
 
-> * Knex is not an ORM but a Query Builder.
+## Study case
 
-## Getting started
+#### Database schema
 
-#### Database configuration
+// TODO explain database schema
 
-Before running the app, make sure you have:
-- [Postgresql installed](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04).
-
-- Database created, to create it run the following steps inside a psql terminal:
-1. CREATE DATABASE db_project_name;
-2. \c db_project_name
-3. CREATE ROLE "project_name" LOGIN CREATEDB PASSWORD 'project_name';
-
-- Create a dotenv file for environment variables. `Dotenv` is used for managing environment variables. They must be stored in a `/.env` file. File structure is described above:
-
-- DB_HOST=localhost
-- DB_PORT=5432
-- DB_USERNAME=project_name
-- DB_PASSWORD=project_name
-- DB_NAME=db_project_name
-
-
-### Migrations
-
-To run migrations, run `npm run migrate`.
-
-
-### Starting app
-
-To start application simply run `npm start`.
+#### Endpoints
 
 Available endpoints defined as follows:
 
@@ -48,32 +21,77 @@ GET /<orm_name>/orders
 POST /<orm_name>/orders
 ```
 
-You can use Postman file to consume API.
-
 ## Benchmark metrics
 
 dasdasdas
 
-### Performance
-Lorem ipsum.
+- Performance: Performance test using [autocannon.js](https://github.com/mcollina/autocannon).
+- Code quality: //TODO research meanwhile im going to use [CodeMetrics](https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-codemetrics) extension.
+- Size: Package size.
+- Stars: GitHub starts.
 
-### Code quality
-Lorem ipsum.
+### Knex
 
-## Conclusions
-Lorem ipsum.
+**[Knex](http://knexjs.org/) is not an ORM but a Query Builder**. It supports Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, and Amazon Redshift.
 
-#### Knex (Query builder)
-Lorem ipsum.
+// TODO Benchmark
 
-#### Objection
-Lorem ipsum.
+### Objection
 
-#### Sequelize
-Lorem ipsum.
+[Objection](https://vincit.github.io/objection.js/) has all the benefits of an SQL query builder but also a powerful set of tools for working with relations, this it can be considered an ORM. Objection is built on Knex, so all databases supported by it are supported by objection.
 
-#### TypeORM
-Lorem ipsum.
+// TODO Benchmark
+
+### Sequelize
+
+[Sequelize](https://sequelize.org/) is an ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more. It is one of the most complete ORMs for Node.js.
+
+// TODO Benchmark
+
+### TypeORM
+
+[TypeORM](https://typeorm.io/#/) is an ORM which goal is to always support the latest JavaScript features and provide additional features that help you to develop any kind of application that uses databases.
+
+TypeORM supports both [Data Mapper](https://typeorm.io/#/active-record-data-mapper) patterns, unlike all other JavaScript ORMs currently in existence, which means you can write high quality, loosely coupled, scalable, maintainable applications the most productive way.
+
+// TODO Benchmark
+
+### Waterline (Pending)
+
+[Waterline](https://waterlinejs.org/) is an adapter-based ORM with support for mysql, mongo, postgres, mssql, and more.
+It provides a uniform API for accessing stuff from different kinds of databases and protocols.
+
+// TODO Benchmark
+
+## Developing
+
+#### Database configuration
+
+Before running the app, make sure you have [Postgresql installed](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04) installed.
+
+You need to create project database manually, to create it run the following steps inside a psql terminal:
+1. `CREATE DATABASE db_project_name;`
+2. `\c db_project_name`
+3. `CREATE ROLE "project_name" LOGIN CREATEDB PASSWORD 'project_name';`
+
+Don't forget to create a dotenv file for environment variables. `Dotenv` is used for managing environment variables. They must be stored in a `/.env` file. File structure is described above:
+
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=project_name
+DB_PASSWORD=project_name
+DB_NAME=db_project_name
+```
+
+#### Migrations
+
+You need to run migrations before start app. To do it simply run `npm run migrate`.
+
+
+#### Starting app
+
+Run in your terminal: `npm start`.
 
 
 #### Debugging
