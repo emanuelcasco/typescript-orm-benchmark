@@ -8,7 +8,7 @@ import {
   Order,
   OrderPayload,
   OrderResponse
-} from './entities';
+} from './interfaces';
 
 const router = Router();
 

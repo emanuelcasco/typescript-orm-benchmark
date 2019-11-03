@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Example base for typescript orm benchmark",
   "engines": {
-    "node": "10.14.1",
+    "node": "10.17.0",
     "npm": "6.4.1"
   },
   "scripts": {
@@ -24,6 +24,7 @@
   "author": "Emanuel Casco",
   "license": "MIT",
   "dependencies": {
+    "autocannon": "^4.3.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
