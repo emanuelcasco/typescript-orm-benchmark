@@ -5,8 +5,11 @@ import { Order, Transaction } from './db';
 const router = Router();
 
 router.get('/orders', async (req: Request, res: Response, next: NextFunction) => {
+  const { simple } = req.query;
   try {
-    const orders = await Order.query().joinEager('items');
+    const query = simple ? Order.query() : Order.query().joinEager('items');
+    
+    const orders = await query;
     return res.status(200).send({ orders });
   } catch (error) {
     return next(Promise.reject('Error processing values'));

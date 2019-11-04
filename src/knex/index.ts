@@ -14,14 +14,20 @@ const router = Router();
 
 router.get('/orders', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const orders: OrderResponse[] = await knex<Order>(TABLES.ORDER)
-      .select(
-        'orders.*',
-        knex.raw(`json_agg(items.*) AS items`)
-      )
-      .leftJoin('orders_items', 'orders.id', 'orders_items.order_id')
-      .leftJoin('items', 'orders_items.item_id', 'items.id')
-      .groupBy('orders.id');
+    const { simple } = req.query;
+    let orders: OrderResponse[];
+    if (simple) {
+      orders = await knex<Order>(TABLES.ORDER).select('orders.*');
+    } else {
+      orders = await knex<Order>(TABLES.ORDER)
+        .select(
+          'orders.*',
+          knex.raw(`json_agg(items.*) AS items`)
+        )
+        .leftJoin('orders_items', 'orders.id', 'orders_items.order_id')
+        .leftJoin('items', 'orders_items.item_id', 'items.id')
+        .groupBy('orders.id');
+    }
     return res.status(200).send({ orders });
   } catch (error) {
     return next(Promise.reject('Error processing values'));

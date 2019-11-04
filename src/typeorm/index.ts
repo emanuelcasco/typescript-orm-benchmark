@@ -11,8 +11,13 @@ export async function initializeTypeOrm(): Promise<Router> {
   router.get(
     '/orders',
     async (req: Request, res: Response, next: NextFunction) => {
+      const { simple } = req.query;
+
+      const options = simple
+        ? {}
+        : { relations: ['items'] };
       try {
-        const orders = await OrderRepository.find({ relations: ['items'] });
+        const orders = await OrderRepository.find(options);
         return res.status(200).send({ orders });
       } catch (error) {
         return next('Error processing values');

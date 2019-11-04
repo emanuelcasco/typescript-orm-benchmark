@@ -14,33 +14,17 @@ For this reasearch we are going to consider following ORMs:
 
 Knex supports Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, and Amazon Redshift.
 
-<p align="center">
-  <img src="assets/knex.png" alt="knex logo" width="75">
-</p>
-
 #### Objection
 
 [Objection](https://vincit.github.io/objection.js/) has all the benefits of an SQL query builder but also a powerful set of tools for working with relations, for this it can be considered an ORM. It is built on Knex, so supports same databases.
-
-<p align="center">
-  <img src="assets/objection.png" alt="objection logo" width="75">
-</p>
 
 #### Sequelize
 
 [Sequelize](https://sequelize.org/) is an ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more. It is one of the most complete ORMs for Node.js.
 
-<p align="center">
-  <img src="assets/sequelize.png" alt="sequelize logo" width="75">
-</p>
-
 #### TypeORM
 
 [TypeORM](https://typeorm.io/#/) is an ORM which goal is to always support the latest JavaScript features and provide additional features that help you to develop any kind of application that uses databases.
-
-<p align="center">
-  <img src="assets/typeorm.png" alt="typeorm logo" width="75">
-</p>
 
 [[Link to results](#Results)].
 
@@ -91,52 +75,6 @@ POST /<orm_name>/orders # Create many orders with their items
 The key in this endpoints is we are managing nested resources. An order has one or many items, and payload has them nested into order.
 
 ## Results
-
-### Features
-
-- Implementation: Provides a "Getting started" guide, with examples and steps explanations about how to implement the library in my project.
-- Recipes: Provides examples about how to implement solutions for different case uses (ie: relations).
-- Real-world examples: Provides real-world examples, with implementations in differents frameworks.
-- Straightforward: Easy to find needed information and read, updated and clear.
-- TypeScript: Provides documentation about TypeScript support, with examples and explanations about best practices.
-
-<table width="100%" align="center">
-  <tr>
-    <th>Library</th>
-    <th>ORM</th> 
-    <th>Query Builder</th> 
-    <th>Connection Pooling</th>
-    <th>Migration Option</th>
-  </tr>
-  <tr align="center">
-    <td>Sequelize</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr align="center">
-    <td>Knex</td>
-    <td>❌</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr align="center">
-    <td>TypeOrm</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-  <tr align="center">
-    <td>Objection</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-    <td>✅</td>
-  </tr>
-</table>
 
 ### Community
 
@@ -275,12 +213,18 @@ Either Sequelize and Knex provide TypeScript documentation, it is not enough to 
 [autocannon](https://github.com/mcollina/autocannon) is a fast HTTP/1.1 benchmarking tool written in Node.js. All examples used are benchmarked using these options:
 
 ```bash
-autocannon -c 100 -d 20 -m "GET" "localhost:8080/<orm>/orders" # <orm> = knex|typeorm|sequelize|objection
+# <orm> = knex|typeorm|sequelize|objection
+
+autocannon -c 100 -d 20 -m "GET" "localhost:8080/<orm>/orders"
+
+autocannon -c 100 -d 20 -m "POST" "localhost:8080/<orm>/orders" -i "./data.json" -H "Content-Type: application/json"
 ```
 
 - `-c` The number of concurrent connections to use.
 - `-d` The number of pipelined requests to use.
 - `-m` The method of the requests.
+- `-i` File path for request body.
+- `-H` Headers definitions.
 
 Test Bench Configuration:
 
@@ -289,94 +233,15 @@ Test Bench Configuration:
 - **RAM**: 16 GB 1600 MHz DDR3.
 - **Node version**: v10.17.0.
 
+#### GET simple
 
-#### GET all orders
-
-##### Latency
-
-<table align="left">
+<table>
   <tr>
     <th>Library</th>
     <th>Latency avg</th>
     <th>Latency max</th>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Sequelize</a link="https://www.npmjs.com/package/sequelize" target="blank">
-    </td>
-    <td>712.43 ms</td>
-    <td>1113.81 ms</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Knex</a link="https://www.npmjs.com/package/knex" target="blank">
-    </td>
-    <td>365.21 ms</td>
-    <td>717.59 ms</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>TypeOrm</a link="https://www.npmjs.com/package/typeorm" target="blank">
-    </td>
-    <td>824.58 ms</td>
-    <td>1461.62 ms</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Objection</a link="https://www.npmjs.com/package/objection" target="blank">
-    </td>
-    <td>411.96 ms</td>
-    <td>997.15 ms</td>
-  </tr>
-</table>
-
-<img src="assets/latency.png" alt="latency graph" width="400">
-
-##### Req/Sec
-
-<table>
-  <tr>
-    <th>Library</th>
     <th>Req/Sec avg</th>
     <th>Req/Sec min</th>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Sequelize</a link="https://www.npmjs.com/package/sequelize" target="blank">
-    </td>
-    <td>154.75</td>
-    <td>80</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Knex</a link="https://www.npmjs.com/package/knex" target="blank">
-    </td>
-    <td>271.36</td>
-    <td>145</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>TypeOrm</a link="https://www.npmjs.com/package/typeorm" target="blank">
-    </td>
-    <td>118.45</td>
-    <td>57</td>
-  </tr>
-  <tr align="center">
-    <td>
-      <a>Objection</a link="https://www.npmjs.com/package/objection" target="blank">
-    </td>
-    <td>240.65</td>
-    <td>101</td>
-  </tr>
-</table>
-
-<img src="assets/latency.png" alt="latency graph" width="400">
-
-##### Bytes/Sec
-
-<table>
-  <tr>
-    <th>Library</th>
     <th>Bytes/Sec avg</th>
     <th>Bytes/Sec min</th>
   </tr>
@@ -384,37 +249,176 @@ Test Bench Configuration:
     <td>
       <a>Sequelize</a link="https://www.npmjs.com/package/sequelize" target="blank">
     </td>
-    <td>612 kB</td>
-    <td>316 kB</td>
+    <td>2201.91 ms</td>
+    <td>2647.18 ms</td>
+    <td>42.9</td>
+    <td>29</td>
+    <td>5.83 MB</td>
+    <td>3.94 MB</td>
   </tr>
   <tr align="center">
     <td>
-      <a>Knex</a link="https://www.npmjs.com/package/knex" target="blank">
+      <a>Knex 🥇</a link="https://www.npmjs.com/package/knex" target="blank">
     </td>
-    <td>777 kB</td>
-    <td>415 kB</td>
+    <td>1276.52 ms ms</td>
+    <td>1647.52 ms</td>
+    <td>75.91</td>
+    <td>58</td>
+    <td>10.3 MB</td>
+    <td>7.88 MB</td>
   </tr>
   <tr align="center">
     <td>
-      <a>TypeOrm</a link="https://www.npmjs.com/package/typeorm" target="blank">
+      <a>TypeOrm 🥈</a link="https://www.npmjs.com/package/typeorm" target="blank">
     </td>
-    <td>335 kB</td>
-    <td>161 kB</td>
+    <td>1423.56 ms</td>
+    <td>1685.29 ms</td>
+    <td>67.8</td>
+    <td>53</td>
+    <td>9.21 MB</td>
+    <td>7.2 MB</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <a>Objection 🥉</a link="https://www.npmjs.com/package/objection" target="blank">
+    </td>
+    <td>1466.76 ms</td>
+    <td>1808.73 ms</td>
+    <td>65.66</td>
+    <td>47</td>
+    <td>8.92 MB</td>
+    <td>6.39 MB</td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="assets/performance-simple.png" alt="graphs for GET performance">
+</p>
+
+#### GET nested object
+
+<table>
+  <tr>
+    <th>Library</th>
+    <th>Latency avg</th>
+    <th>Latency max</th>
+    <th>Req/Sec avg</th>
+    <th>Req/Sec min</th>
+    <th>Bytes/Sec avg</th>
+    <th>Bytes/Sec min</th>
+  </tr>
+  <tr align="center">
+    <td>
+      <a>Sequelize</a link="https://www.npmjs.com/package/sequelize" target="blank">
+    </td>
+    <td>5697.71 ms</td>
+    <td>7124.39 ms</td>
+    <td>14.75</td>
+    <td>6</td>
+    <td>5.1 MB</td>
+    <td>2.07 MB</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <a>Knex 🥇</a link="https://www.npmjs.com/package/knex" target="blank">
+    </td>
+    <td>2156.48 ms</td>
+    <td>2471.32 ms</td>
+    <td>43.9</td>
+    <td>35</td>
+    <td>11 MB</td>
+    <td>8.8 MB</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <a>TypeOrm 🥉</a link="https://www.npmjs.com/package/typeorm" target="blank">
+    </td>
+    <td>2917.68 ms</td>
+    <td>4586.61 ms</td>
+    <td>31.9</td>
+    <td>14</td>
+    <td>8.02 MB</td>
+    <td>3.52 MB</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <a>Objection 🥈</a link="https://www.npmjs.com/package/objection" target="blank">
+    </td>
+    <td>2902.18 ms</td>
+    <td>3672.11 ms</td>
+    <td>32.1</td>
+    <td>15</td>
+    <td>8.07 MB</td>
+    <td>3.77 MB</td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="assets/performance-get.png" alt="graphs for GET performance">
+</p>
+
+#### POST nested object
+
+
+<table>
+  <tr>
+    <th>Library</th>
+    <th>Latency avg</th>
+    <th>Latency max</th>
+    <th>Req/Sec avg</th>
+    <th>Req/Sec min</th>
+    <th>Bytes/Sec avg</th>
+    <th>Bytes/Sec min</th>
+  </tr>
+  <tr align="center">
+    <td>
+      <a>Sequelize 🥉</a link="https://www.npmjs.com/package/sequelize" target="blank">
+    </td>
+    <td>882.75 ms</td>
+    <td>1304.18 ms</td>
+    <td>111.2</td>
+    <td>70</td>
+    <td>38.9 kB</td>
+    <td>24.3 kB</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <a>Knex 🥈</a link="https://www.npmjs.com/package/knex" target="blank">
+    </td>
+    <td>693.45 ms</td>
+    <td>1166.97 ms</td>
+    <td>141.95</td>
+    <td>91</td>
+    <td>50.4 kB</td>
+    <td>32.2 kB</td>
+  </tr>
+  <tr align="center">
+    <td>
+      <a>TypeOrm 🥇</a link="https://www.npmjs.com/package/typeorm" target="blank">
+    </td>
+    <td>477.26 ms</td>
+    <td>2507.41 ms</td>
+    <td>205.95</td>
+    <td>36</td>
+    <td>65.2 kB</td>
+    <td>11.2 kB</td>
   </tr>
   <tr align="center">
     <td>
       <a>Objection</a link="https://www.npmjs.com/package/objection" target="blank">
     </td>
-    <td>680 kB</td>
-    <td>285 kB</td>
+    <td>906.97 ms</td>
+    <td>1322.14 ms</td>
+    <td>108</td>
+    <td>70</td>
+    <td>34.1 kB</td>
+    <td>21.9 kB</td>
   </tr>
 </table>
 
-<img src="assets/latency.png" alt="latency graph" width="400">
-
-##### POST many orders
-
-// TODO Add metrics
+<p align="center">
+  <img src="assets/performance-post.png" alt="graphs for post performance">
+</p>
 
 ## Developing
 

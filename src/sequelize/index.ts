@@ -9,10 +9,13 @@ const router = Router();
 router.get(
   '/orders',
   async (req: Request, res: Response, next: NextFunction) => {
+    const { simple } = req.query;
+
+    const options = simple
+      ? {}
+      : { include: [{ model: Item, as: 'items' }] };
     try {
-      const orders = await Order.findAll({
-        include: [{ model: Item, as: 'items' }]
-      });
+      const orders = await Order.findAll(options);
       return res.status(200).send({ orders });
     } catch (error) {
       return next('Error processing values');

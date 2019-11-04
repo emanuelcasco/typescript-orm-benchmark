@@ -46,8 +46,8 @@
     "@types/pg": "^7.4.14",
     "@types/sequelize": "^4.28.3",
     "@types/validator": "^10.11.3",
-    "@typescript-eslint/eslint-plugin": "^2.3.1",
-    "@typescript-eslint/eslint-plugin-tslint": "^2.5.0",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/eslint-plugin-tslint": "^2.6.1",
     "@typescript-eslint/parser": "^2.3.1",
     "babel": "6.23.0",
     "babel-core": "6.26.0",
@@ -61,7 +61,7 @@
     "husky": "^0.14.3",
     "sequelize-cli": "^5.5.1",
     "ts-node-dev": "1.0.0-pre.40",
-    "tslint": "^5.20.0",
-    "typescript": "^3.5.2"
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
   }
 }
