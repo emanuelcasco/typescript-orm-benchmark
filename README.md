@@ -1,45 +1,56 @@
 # ORM research for TypeScript Node.js applications
 
-### Motivation
+
+## Table of contents
+
+* [Introduction](#introduction)
+  + [Important concepts](#important-concepts)
+  + [Which libraries are we going to analize?](#which-libraries-are-we-going-to-analize)
+* [Case study](#case-study)
+  + [Database schema](#database-schema)
+  + [Endpoints](#endpoints)
+* [Results](#results)
+  + [Community](#community)
+  + [Documentation](#documentation)
+  + [TypeScript integration](#typescript-integration)
+  + [Performance](#performance)
+* [Developing](#developing)
+  + [Database configuration](#database-configuration)
+  + [Migrations](#migrations)
+  + [Starting app](#starting-app)
+  + [Debugging](#debugging)
+* [License](#license)
+
+## Introduction
 
 Research's motivation is provide an global and objective vision about most used ORMs in market. It does not try to define which is the best but instead describes their characteristics, features, performance, and pros and cons.
 
-### What tools are we going to analize?
-
-For this reasearch we are going to consider following ORMs:
-
-#### Knex
-
-[Knex](http://knexjs.org/) is a Query Builder. As it name clames, a query builder is an interface that allows you to writte SQL in your prefered language. Main difference with ORMs is that you don't have to define models strucutre for a query builder because you are not working with objects that represents your data.
-
-Knex supports Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, and Amazon Redshift.
-
-#### Objection
-
-[Objection](https://vincit.github.io/objection.js/) has all the benefits of an SQL query builder but also a powerful set of tools for working with relations, for this it can be considered an ORM. It is built on Knex, so supports same databases.
-
-#### Sequelize
-
-[Sequelize](https://sequelize.org/) is an ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more. It is one of the most complete ORMs for Node.js.
-
-#### TypeORM
-
-[TypeORM](https://typeorm.io/#/) is an ORM which goal is to always support the latest JavaScript features and provide additional features that help you to develop any kind of application that uses databases.
-
-[[Link to results](#Results)].
+### Important concepts
 
 #### What is an ORM?
 
-When people talk about ORM, they usually make reference to a library that implements the Object-Relational Mapping (ORM) technique\*. It is a completely ordinary library written in your language of choice that encapsulates the code needed to manipulate the data in your database, so you don't use SQL anymore; you interact directly with an interface in the same language you're using.
+When people talk about ORM, they usually make reference to a library that implements the Object-Relational Mapping (ORM) technique. It is a completely ordinary library written in your language of choice that encapsulates the code needed to manipulate the data in your database, so you don't use SQL anymore; you interact directly with an interface in the same language you're using.
 
 You can find a great explanation in the following link from [StackOverflow](https://stackoverflow.com/questions/1279613/what-is-an-orm-how-does-it-work-and-how-should-i-use-one).
+
+#### What is a Query Builder?
+
+As it name clames, a query builder is an interface that allows you to writte SQL in your prefered language. Main difference with ORMs is that you don't have to define models strucutre for a query builder because you are not working with objects that represents your data.
+
+### Which libraries are we going to analize?
+
+For this reasearch we are going to consider following ORMs:
+
+- [Sequelize](https://sequelize.org/): It features solid transaction support, relations, eager and lazy loading, read replication and more. It is one of the most complete ORMs for Node.js. It supports: Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server.
+- [Knex](http://knexjs.org/): It's a very powerfull query builder with transactions support. It hasn't all features an ORM may has but its performance its quite better. Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, and Amazon Redshift.
+- [TypeORM](https://typeorm.io/#/): Its goal is to always support the latest JavaScript features and provide additional features that help you to develop any kind of application that uses databases. It supports MySQL, MariaDB, Postgres, CockroachDB, SQLite, Microsoft SQL Server, Oracle and [MongoDB NoSQL](https://github.com/typeorm/typeorm/blob/master/docs/active-record-data-mapper.md).
+- [Objection](https://vincit.github.io/objection.js/): It's build on Knex, thus supports same databases. It has all the benefits of an SQL query builder but also a powerful set of tools for working with relations, for this it can be considered an ORM.
 
 ## Case study
 
 ### Database schema
 
-For the research, we created a simple database schema. Many-to-many relation was choosen given it provides us with some
-For research purpose we created a simple database schema with a many to many relationship between model orders and items.
+For the research, we've created a simple database schema with a Many-to-many relation. This schema allows to test libraries features, performance and code quality while keeping examples simple. We are going to work with [Postgres](https://www.postgresql.org/) as relational database.
 
 <img src="assets/db.png" alt="database schema" width="500" align="left">
 
@@ -89,7 +100,7 @@ First, we can look at NPM packages and their metrics to have a clear image about
   </tr>
   <tr align="center">
     <td>
-      <a>Sequelize</a link="https://www.npmjs.com/package/sequelize" target="blank">
+      <a link="https://www.npmjs.com/package/sequelize" target="blank">Sequelize</a>
     </td>
     <td>Jul 22, 2010</td>
     <td>446,312</td>
@@ -97,7 +108,7 @@ First, we can look at NPM packages and their metrics to have a clear image about
   </tr>
   <tr align="center">
     <td>
-      <a>Knex</a link="https://www.npmjs.com/package/knex" target="blank">
+      <a link="https://www.npmjs.com/package/knex" target="blank">Knex</a>
     </td>
     <td>Dec 29, 2012</td>
     <td>410,065</td>
@@ -105,7 +116,7 @@ First, we can look at NPM packages and their metrics to have a clear image about
   </tr>
   <tr align="center">
     <td>
-      <a>TypeOrm</a link="https://www.npmjs.com/package/typeorm" target="blank">
+      <a link="https://www.npmjs.com/package/typeorm" target="blank">TypeORM</a>
     </td>
     <td>Feb 29, 2016</td>
     <td>168,470</td>
@@ -113,7 +124,7 @@ First, we can look at NPM packages and their metrics to have a clear image about
   </tr>
   <tr align="center">
     <td>
-      <a>Objection</a link="https://www.npmjs.com/package/objection" target="blank">
+      <a link="https://www.npmjs.com/package/objection" target="blank">Objection</a>
     </td>
     <td>Apr 14, 2015</td>
     <td>49,842</td>
@@ -129,7 +140,7 @@ In this category, Sequelize seems to be a clear winner. It has been in the game 
 
 Objection, in the other side, shows an almost null downloads increase keeping around 50K downloads per week.
 
-Finally, in the last year TypeOrm has triplicated its downloads. Despite staying still well below Sequelize and Knex it is positioning itself as an interesting competitor.
+Finally, in the last year TypeORM has triplicated its downloads. Despite staying still well below Sequelize and Knex it is positioning itself as an interesting competitor.
 
 You can find an updated analisys about npm packages on [NPM Trends](https://www.npmtrends.com/knex-vs-sequelize-vs-objection-vs-typeorm).
 
@@ -152,7 +163,7 @@ You can find an updated analisys about npm packages on [NPM Trends](https://www.
   </tr>
   <tr align="center">
     <td>
-      <a>Sequelize</a link="https://sequelize.org/v5/manual/getting-started.html" target="blank">
+      <a link="https://sequelize.org/v5/manual/getting-started.html" target="blank">Sequelize</a>
     </td>
     <td>✅</td>
     <td>✅</td>
@@ -162,7 +173,7 @@ You can find an updated analisys about npm packages on [NPM Trends](https://www.
   </tr>
   <tr align="center">
     <td>
-      <a>Knex</a link="http://knexjs.org/" target="blank">
+      <a link="http://knexjs.org/" target="blank">Knex</a>
     </td>
     <td>✅</td>
     <td>❌</td>
@@ -172,7 +183,7 @@ You can find an updated analisys about npm packages on [NPM Trends](https://www.
   </tr>
   <tr align="center">
     <td>
-      <a>TypeOrm</a link="https://typeorm.io/#/" target="blank">
+      <a link="https://typeorm.io/#/" target="blank">TypeORM</a>
     </td>
     <td>✅</td>
     <td>✅</td>
@@ -182,11 +193,11 @@ You can find an updated analisys about npm packages on [NPM Trends](https://www.
   </tr>
   <tr align="center">
     <td>
-      <a>Objection</a link="https://vincit.github.io/objection.js/guide/" target="blank">
+      <a link="https://vincit.github.io/objection.js/guide/" target="blank">Objection</a>
     </td>
     <td>✅</td>
     <td>✅</td>
-    <td>❌</td>
+    <td>✅</td>
     <td>✅</td>
     <td>✅</td>
   </tr>
@@ -194,19 +205,37 @@ You can find an updated analisys about npm packages on [NPM Trends](https://www.
 
 Either Sequelize and Knex provide TypeScript documentation, it is not enough to implement a clean solution in our projects and requires more research.
 
-### Code quality
-
-#### Implementation
-
-// TODO
-
-#### Complexity
-
-// TODO
-
 ### TypeScript integration
 
-// TODO
+All analized libraries expose their own types we can use, but not all has a great integration with TypeScript and developing experience could be a little bit rough with some of them.
+
+#### Sequelize 👎
+
+Paraphrasing it's [own documentation](https://sequelize.org/master/manual/typescript.html): _"As Sequelize heavily relies on runtime property assignments, TypeScript won't be very useful out of the box. A decent amount of manual type declarations are needed to make models workable."_. Working with Sequelize and TypeScript could be a really bad experience when you are starting with typing in JavaScript. You have to do a lot of manual work to define your models and made them work in strict mode.
+
+Relationships are hard with Sequelize and TypeScript. You’ll need to add a set of mixin functions for every single [association](https://sequelize.org/master/manual/associations.html) you create and on both the models involved in the association. If you want to know more about this, you can read [this article which explains how to setup Sequelize with TypeScript](https://vivacitylabs.com/setup-typescript-sequelize/).
+
+Moreover, when you start deep inside sequelize functionality you will notice many optional properties you can pass some functions are not typed! For example, when you use `bulkCreate` optional property `include` (which should be defined on `BulkCreateOptions` interface) is not created so you have to extend Sequelize type definitions yourself in order to use it.
+
+#### Knex 👍
+
+Remember Knex is just a query builder, so we don't define entities, models or any other object that represents our table data. For this reason, we need to create interfaces for our inputs and outputs. Besides that, **integration between TypeScript and Knex is acceptable**.
+
+#### TypeORM 🏆
+
+TypeORM, name already gives us a hint, **is a perfect partner for TypeScript** and is the one that exploits the most its capabilities. It allows you to write only one TypeScript Class and automatically generates all structure for your entity.
+
+Code complexity and quantity are greatly reduced, thus our entities definitions are much more cleaner than, for example, Sequelize. 
+
+Decorators can seem to be strange at first sight, especially if you've never implement this concept before, but once you get used to them they are very easy to use.
+
+#### Objection 🏆
+
+Another **great TypeScript partner**, integration is surprisingly simple and intuitive. You define your models and Objection automatically generates all structure you need to use them. Models definition are very clean and use them is very straightforward.
+
+Documentation is very simple and usefull and you have [real-world examples as guide](https://github.com/Vincit/objection.js/blob/master/examples/express-ts/).
+
+Besides, it could be a good alternative if you want to avoid using TypeORM decorators syntax, and keep a more conservative sintax.
 
 ### Performance
 
@@ -247,7 +276,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Sequelize</a link="https://www.npmjs.com/package/sequelize" target="blank">
+      <a>Sequelize</a>
     </td>
     <td>2201.91 ms</td>
     <td>2647.18 ms</td>
@@ -258,7 +287,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Knex 🥇</a link="https://www.npmjs.com/package/knex" target="blank">
+      <a>Knex 🥇</a>
     </td>
     <td>1276.52 ms ms</td>
     <td>1647.52 ms</td>
@@ -269,7 +298,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>TypeOrm 🥈</a link="https://www.npmjs.com/package/typeorm" target="blank">
+      <a>TypeORM 🥈</a>
     </td>
     <td>1423.56 ms</td>
     <td>1685.29 ms</td>
@@ -280,7 +309,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Objection 🥉</a link="https://www.npmjs.com/package/objection" target="blank">
+      <a>Objection 🥉</a>
     </td>
     <td>1466.76 ms</td>
     <td>1808.73 ms</td>
@@ -309,7 +338,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Sequelize</a link="https://www.npmjs.com/package/sequelize" target="blank">
+      <a>Sequelize</a>
     </td>
     <td>5697.71 ms</td>
     <td>7124.39 ms</td>
@@ -320,7 +349,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Knex 🥇</a link="https://www.npmjs.com/package/knex" target="blank">
+      <a>Knex 🥇</a>
     </td>
     <td>2156.48 ms</td>
     <td>2471.32 ms</td>
@@ -331,7 +360,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>TypeOrm 🥉</a link="https://www.npmjs.com/package/typeorm" target="blank">
+      <a>TypeORM 🥉</a>
     </td>
     <td>2917.68 ms</td>
     <td>4586.61 ms</td>
@@ -342,7 +371,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Objection 🥈</a link="https://www.npmjs.com/package/objection" target="blank">
+      <a>Objection 🥈</a>
     </td>
     <td>2902.18 ms</td>
     <td>3672.11 ms</td>
@@ -372,7 +401,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Sequelize 🥉</a link="https://www.npmjs.com/package/sequelize" target="blank">
+      <a>Sequelize 🥉</a>
     </td>
     <td>882.75 ms</td>
     <td>1304.18 ms</td>
@@ -383,7 +412,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Knex 🥈</a link="https://www.npmjs.com/package/knex" target="blank">
+      <a>Knex 🥈</a>
     </td>
     <td>693.45 ms</td>
     <td>1166.97 ms</td>
@@ -394,7 +423,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>TypeOrm 🥇</a link="https://www.npmjs.com/package/typeorm" target="blank">
+      <a>TypeORM 🥇</a>
     </td>
     <td>477.26 ms</td>
     <td>2507.41 ms</td>
@@ -405,7 +434,7 @@ Test Bench Configuration:
   </tr>
   <tr align="center">
     <td>
-      <a>Objection</a link="https://www.npmjs.com/package/objection" target="blank">
+      <a>Objection</a>
     </td>
     <td>906.97 ms</td>
     <td>1322.14 ms</td>
@@ -422,7 +451,7 @@ Test Bench Configuration:
 
 ## Developing
 
-#### Database configuration
+### Database configuration
 
 Before running the app, make sure you have [Postgresql installed](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04) installed.
 
@@ -442,15 +471,15 @@ DB_PASSWORD=project_name
 DB_NAME=db_project_name
 ```
 
-#### Migrations
+### Migrations
 
 You need to run migrations before start app. To do it simply run `npm run migrate`.
 
-#### Starting app
+### Starting app
 
 Run in your terminal: `npm start`.
 
-#### Debugging
+### Debugging
 
 In order to debug our Node.js application, we enable 'sourceMap' in `tsconfig.json`, this compiler option generates corresponding `.map` files from original Javascipt counterpart. This change is mandatory to attach a debugger, otherwise it wouldn't be able to match transpiled files with their originals.
 
@@ -478,22 +507,9 @@ In VSCode, you will need to add an `./.vscode/launch.json` file in order to laun
 }
 ```
 
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Run the tests (`npm test`)
-4. Commit your changes (`git commit -am 'Add some feature'`)
-5. Push to the branch (`git push origin my-new-feature`)
-6. Create new Pull Request
-
-## About
-
-This project is written and maintained by [Emanuel Casco](https://github.com/emanuelcasco).
-
 ## License
 
-**typescript-orm-benchmark** is available under the MIT [license](LICENSE.md).
+This project is written and maintained by [Emanuel Casco](https://github.com/emanuelcasco) and is available under the MIT [license](LICENSE.md).
 
     Copyright (c) 2019 Emanuel Casco
 

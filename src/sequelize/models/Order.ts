@@ -15,8 +15,8 @@ export type OrderModel = Sequelize.Model<OrderInstance, OrderAttributes>;
 export const OrderFactory = (
   sequelize: Sequelize.Sequelize,
   DataTypes: Sequelize.DataTypes
-): Sequelize.Model<OrderInstance, OrderAttributes> => {
-  const Order = sequelize.define<OrderInstance, OrderAttributes>(
+): OrderModel => {
+  const Order: OrderModel = sequelize.define<OrderInstance, OrderAttributes>(
     'orders',
     {
       id: {

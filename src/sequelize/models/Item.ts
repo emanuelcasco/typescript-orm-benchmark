@@ -15,8 +15,8 @@ export type ItemModel = Sequelize.Model<ItemInstance, ItemAttributes>;
 export const ItemFactory = (
   sequelize: Sequelize.Sequelize,
   DataTypes: Sequelize.DataTypes
-): Sequelize.Model<ItemInstance, ItemAttributes> => {
-  const Item = sequelize.define<ItemInstance, ItemAttributes>(
+): ItemModel => {
+  const Item: ItemModel = sequelize.define<ItemInstance, ItemAttributes>(
     'items',
     {
       id: {
