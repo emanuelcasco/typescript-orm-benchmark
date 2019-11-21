@@ -21,15 +21,18 @@
   + [Debugging](#debugging)
 * [License](#license)
 
+
 ## Introduction
 
-Research's motivation is provide an global and objective vision about most used ORMs in market. It does not try to define which is the best but instead describes their characteristics, features, performance, and pros and cons.
+This research research motivation is to provide a global and objective vision about most used Node.js ORMs in market.
+
+This document does not try to declare which is the best but instead describes their characteristics, features, performance, pros and cons, implementation, and so.
 
 ### Important concepts
 
 #### What is an ORM?
 
-When people talk about ORM, they usually make reference to a library that implements the Object-Relational Mapping (ORM) technique. It is a completely ordinary library written in your language of choice that encapsulates the code needed to manipulate the data in your database, so you don't use SQL anymore; you interact directly with an interface in the same language you're using.
+When people talk about ORMs, they usually make reference to a library that implements the Object-Relational Mapping (ORM) technique. It is a completely ordinary library written in your language of choice that encapsulates the code needed to manipulate the data in your database, so you don't use SQL anymore; you interact directly with an interface in the same language you're using.
 
 You can find a great explanation in the following link from [StackOverflow](https://stackoverflow.com/questions/1279613/what-is-an-orm-how-does-it-work-and-how-should-i-use-one).
 
@@ -45,6 +48,7 @@ For this reasearch we are going to consider following ORMs:
 - [Knex](http://knexjs.org/): It's a very powerfull query builder with transactions support. It hasn't all features an ORM may has but its performance its quite better. Postgres, MSSQL, MySQL, MariaDB, SQLite3, Oracle, and Amazon Redshift.
 - [TypeORM](https://typeorm.io/#/): Its goal is to always support the latest JavaScript features and provide additional features that help you to develop any kind of application that uses databases. It supports MySQL, MariaDB, Postgres, CockroachDB, SQLite, Microsoft SQL Server, Oracle and [MongoDB NoSQL](https://github.com/typeorm/typeorm/blob/master/docs/active-record-data-mapper.md).
 - [Objection](https://vincit.github.io/objection.js/): It's build on Knex, thus supports same databases. It has all the benefits of an SQL query builder but also a powerful set of tools for working with relations, for this it can be considered an ORM.
+
 
 ## Case study
 
@@ -84,6 +88,7 @@ POST /<orm_name>/orders # Create many orders with their items
 ```
 
 The key in this endpoints is we are managing nested resources. An order has one or many items, and payload has them nested into order.
+
 
 ## Results
 
@@ -142,7 +147,9 @@ Objection, in the other side, shows an almost null downloads increase keeping ar
 
 Finally, in the last year TypeORM has triplicated its downloads. Despite staying still well below Sequelize and Knex it is positioning itself as an interesting competitor.
 
-You can find an updated analisys about npm packages on [NPM Trends](https://www.npmtrends.com/knex-vs-sequelize-vs-objection-vs-typeorm).
+**You can find an updated analisys about npm packages on [NPM Trends](https://www.npmtrends.com/knex-vs-sequelize-vs-objection-vs-typeorm) 🔗**.
+
+<p  align="center">• • •</p>
 
 ### Documentation
 
@@ -205,6 +212,8 @@ You can find an updated analisys about npm packages on [NPM Trends](https://www.
 
 Either Sequelize and Knex provide TypeScript documentation, it is not enough to implement a clean solution in our projects and requires more research.
 
+<p  align="center">• • •</p>
+
 ### TypeScript integration
 
 All analized libraries expose their own types we can use, but not all has a great integration with TypeScript and developing experience could be a little bit rough with some of them.
@@ -236,6 +245,8 @@ Another **great TypeScript partner**, integration is surprisingly simple and int
 Documentation is very simple and usefull and you have [real-world examples as guide](https://github.com/Vincit/objection.js/blob/master/examples/express-ts/).
 
 Besides, it could be a good alternative if you want to avoid using TypeORM decorators syntax, and keep a more conservative sintax.
+
+<p  align="center">• • •</p>
 
 ### Performance
 
@@ -388,7 +399,6 @@ Test Bench Configuration:
 
 #### POST nested object
 
-
 <table>
   <tr>
     <th>Library</th>
@@ -448,6 +458,7 @@ Test Bench Configuration:
 <p align="center">
   <img src="assets/performance-post.png" alt="graphs for post performance">
 </p>
+
 
 ## Developing
 
